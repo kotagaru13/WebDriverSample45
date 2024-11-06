@@ -13,10 +13,9 @@ public class RadiochkBoxTest {
 	  WebDriver driver = new ChromeDriver();
 	  driver.manage().window().maximize();
 	  driver.get("https://the-internet.herokuapp.com/checkboxes");
-	  Thread.sleep(2000);
+	  Thread.sleep(10000);
 	  driver.findElement(By.xpath("(//input[@type='checkbox'])[1]")).click();
-      boolean isSel = false;
-	//	  boolean isSel = driver.findElement(By.xpath("(//input[@type='checkbox'])[2]")).
+	  boolean isSel = driver.findElement(By.xpath("(//input[@type='checkbox'])[2]")).isSelected();
 	  if(isSel) {
 		  driver.findElement(By.xpath("(//input[@type='checkbox'])[2]")).click();
 	  }

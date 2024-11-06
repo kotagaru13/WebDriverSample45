@@ -1,18 +1,32 @@
 package TestScripts;
 
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
 public class DropDownTest {
   @Test
   public void selectOptions() throws InterruptedException {
-    ChromeDriver driver = new ChromeDriver();
-   	  driver.manage().window().maximize();
+	  WebDriver driver = new ChromeDriver();
+	  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+	  driver.manage().window().maximize();
 	  driver.get("https://www.stqatools.com/demo/Multiselect.php");
 	  
-	  Select dataSel = new Select ()
-  
-  
+//	  Thread.sleep(2000);
+	  
+	 Select dateSel = new Select(driver.findElement(By.cssSelector("select.date_s")));
+	 dateSel.selectByVisibleText("1983");
+	 
+	 Select nameSel = new Select(driver.findElement(By.cssSelector("select.name_s")));
+	 
+	 nameSel.selectByIndex(0);
+	 nameSel.selectByValue("Jonas");
+	 nameSel.deselectByVisibleText("Gustaf");
+	 nameSel.getAllSelectedOptions();
   
   
   

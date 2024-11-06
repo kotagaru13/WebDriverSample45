@@ -48,8 +48,8 @@ public class WinPopupTest {
 			  System.out.println(" Win titile : " + driver.getTitle());
 		  }
 	  }
-//	  driver.close();
-	  driver.quit()
+	  driver.close();
+//	  driver.quit()
 	  ;
   }
 }

@@ -16,9 +16,11 @@ public class IFrmaeTest {
 	  WebElement iFrameElem = driver.findElement(By.id("mce_0_ifr"));
 	  driver.switchTo().frame(iFrameElem);
 	  WebElement inputTxt = driver.findElement(By.id("tinymce"));
-	  inputTxt.clear(); //Edit here
+//	  inputTxt.clear(); 
+	  String strTxt = inputTxt.getText();
+	  System.out.println("Txt from Frame..." + strTxt);
 	 
-	  inputTxt.sendKeys("Hello Welcome" );
+//	  inputTxt.sendKeys("Hello Welcome" );
 	  
 	  driver.switchTo().defaultContent();
 	  WebElement linkTxt = driver.findElement(By.cssSelector("span.tox-statusbar__branding"));

@@ -25,8 +25,7 @@ public class ToolTipTest {
 	  WebElement age = driver.findElement(By.id("age"));
 	  age.sendKeys("20");
 	  
-	  
-	  
+	    
 	  
 	  
   }
