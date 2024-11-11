@@ -13,8 +13,10 @@ public class MouseActionsTest {
 //		options.addArguments("--blink-settings=imagesEnables=fasle");
 		WebDriver driver = new ChromeDriver(options);
 		driver.manage().window().maximize();
+		driver.get("https:demo.opencart.com/");
+		System.out.println("Display URL");
 		Actions actions = new Actions(driver);
-		 driver.get("https:demo.opencart.com/");
+		
 	Thread.sleep(2000);
 	WebElement srcBox = driver.findElement(By.name("search"));
 	
