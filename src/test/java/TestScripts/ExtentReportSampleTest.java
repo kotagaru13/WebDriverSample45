@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
@@ -15,7 +16,11 @@ import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+
+import commonUtils.Utility;
 
 public class ExtentReportSampleTest {
 	WebDriver driver;
@@ -48,14 +53,14 @@ public class ExtentReportSampleTest {
 	  Assert.assertEquals("Appium Tutorial - Google Search",  driver.getTitle());
 	  
   									}
-  @Test
-  public void cucumberSearchTest() {
+  @Test(retryAnalyzer = RetryAnalyzerImpl.class)
+  public void cucumberSearchTest() throws InterruptedException {
 	  extentTest = extentReports.createTest("Cucember Search Test");
 	  driver.get("https://www.google.com/");
 	  WebElement searchBox = driver.findElement(By.name("q"));
 	  searchBox.sendKeys("Cucumber Tutorial");
 	  searchBox.submit();
-	  Assert.assertEquals("Cucumber Tutorial - Google Search",  driver.getTitle());
+	  Assert.assertEquals("Cucumber Tutorial - Google Search Page",  driver.getTitle());
 	  
       						}
   
@@ -66,7 +71,19 @@ public class ExtentReportSampleTest {
 	   extentReports.flush();
         }
    @AfterMethod
-   public void teardown() {
+   public void teardown(ITestResult result) {
+	   if(ITestResult.FAILURE ==result.getStatus()) {
+		   extentTest.log(Status.FAIL, result.getThrowable().getMessage());
+		   String strPath = Utility.getScreenshotPath(driver);
+		   extentTest.fail(MediaEntityBuilder.createScreenCaptureFromPath(strPath).build());
+		 }
+	   else if (ITestResult.SKIP == result.getStatus()) {
+		   extentTest.log(Status.SKIP,result.getThrowable().getMessage()) ;
+	   }
+	   
+	   
+	   
+	   
 	   driver.close();
    }
    
